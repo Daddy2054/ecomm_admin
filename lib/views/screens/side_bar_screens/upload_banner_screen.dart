@@ -94,7 +94,7 @@ class UploadBannerScreen extends StatelessWidget {
           ),
           const Divider(
             color: Colors.grey,
-          )
+          ),
         ],
       ),
     );
