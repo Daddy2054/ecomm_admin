@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class VendorScreen extends StatelessWidget {
   const VendorScreen({super.key});
+  static const String routeName = 'vendorScreen';
 
   @override
   Widget build(BuildContext context) {
