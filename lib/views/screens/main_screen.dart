@@ -67,16 +67,16 @@ class _MainScreenState extends State<MainScreen> {
     return AdminScaffold(
       body: _selectedItem,
       backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-      appBar: AppBar(
-        backgroundColor: Colors.yellow.shade900,
-        title: const Text(
-          'Management',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.yellow.shade900,
+      //   title: const Text(
+      //     'Management',
+      //     style: TextStyle(
+      //       fontWeight: FontWeight.bold,
+      //       color: Colors.white,
+      //     ),
+      //   ),
+      // ),
       sideBar: SideBar(
         items: const [
           AdminMenuItem(
@@ -117,6 +117,32 @@ class _MainScreenState extends State<MainScreen> {
         ],
         selectedRoute: '',
         onSelected: (item) => screenSelector(item),
+        header: Container(
+          height: 50,
+          width: double.infinity,
+          color: Colors.yellow.shade700,
+          child: const Center(
+            child: Text(
+              'Multi Store Admin ',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        footer: Container(
+          height: 50,
+          width: double.infinity,
+          color: const Color(0xff444444),
+          child: const Center(
+            child: Text(
+              'footer',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
