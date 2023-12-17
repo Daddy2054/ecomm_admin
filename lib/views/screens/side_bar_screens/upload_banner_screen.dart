@@ -63,13 +63,16 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
                         ),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      // child: Center(
-                      //   child: _image != null
-                      //       ? Image.memory(_image)
-                      //       : Text(
-                      //           'Banner Image',
-                      //         ),
-                      // ),
+                      child: Center(
+                        child: _image != null
+                            ? Image.memory(
+                                _image,
+                                fit: BoxFit.cover,
+                              )
+                            : const Text(
+                                'Banner Image',
+                              ),
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
