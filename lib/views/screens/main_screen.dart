@@ -1,12 +1,13 @@
-import 'package:ecomm_admin/views/screens/side_bar_screens/category_screen.dart';
-import 'package:ecomm_admin/views/screens/side_bar_screens/dashboard_screen.dart';
-import 'package:ecomm_admin/views/screens/side_bar_screens/order_screen.dart';
-import 'package:ecomm_admin/views/screens/side_bar_screens/product_screen.dart';
-import 'package:ecomm_admin/views/screens/side_bar_screens/upload_banner_screen.dart';
-import 'package:ecomm_admin/views/screens/side_bar_screens/vendor_screen.dart';
-import 'package:ecomm_admin/views/screens/side_bar_screens/withdraval_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
+
+import 'side_bar_screens/category_screen.dart';
+import 'side_bar_screens/dashboard_screen.dart';
+import 'side_bar_screens/order_screen.dart';
+import 'side_bar_screens/product_screen.dart';
+import 'side_bar_screens/upload_banner_screen.dart';
+import 'side_bar_screens/vendor_screen.dart';
+import 'side_bar_screens/withdraval_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
