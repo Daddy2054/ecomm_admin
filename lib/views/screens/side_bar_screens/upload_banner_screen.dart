@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class UploadBannerScreen extends StatefulWidget {
   const UploadBannerScreen({super.key});
@@ -33,15 +34,38 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
     }
   }
 
- _uploadBannersToStorage(dynamic image) async {
-    Reference ref =
-        _firebaseStorage.ref().child('Banners').child(fileName!);
+  _uploadBannersToStorage(dynamic image) async {
+    Reference ref = _firebaseStorage.ref().child('banners').child(fileName!);
 
     UploadTask uploadTask = ref.putData(image!);
     TaskSnapshot snap = await uploadTask;
     String downloadUrl = await snap.ref.getDownloadURL();
 
     return downloadUrl;
+  }
+
+  uploadToFirebase() async {
+    EasyLoading.show();
+    if (_formKey.currentState!.validate()) {
+      if (_image != null) {
+        String imageUrl = await _uploadBannersToStorage(_image);
+
+        await _firestore.collection('banners').doc(fileName).set({
+          'image': imageUrl,
+        }).whenComplete(() {
+          setState(() {
+            _formKey.currentState!.reset();
+            _image = null;
+
+            EasyLoading.dismiss();
+          });
+        });
+      } else {
+        EasyLoading.dismiss();
+      }
+    } else {
+      EasyLoading.dismiss();
+    }
   }
 
   @override
@@ -121,9 +145,7 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.yellow.shade900,
                 ),
-                onPressed: () {
-                  // uploadToFirebase();
-                },
+                onPressed: uploadToFirebase,
                 child: const Text(
                   'Save',
                   style: TextStyle(
