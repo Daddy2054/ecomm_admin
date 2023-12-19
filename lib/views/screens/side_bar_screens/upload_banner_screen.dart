@@ -48,26 +48,25 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
     EasyLoading.show();
     //if (_formKey.currentState != null) {
     //  if (_formKey.currentState!.validate()) {
-        if (_image != null) {
-          String imageUrl = await _uploadBannersToStorage(_image);
+    if (_image != null) {
+      String imageUrl = await _uploadBannersToStorage(_image);
 
-          await _firestore.collection('banners').doc(fileName).set({
-            'image': imageUrl,
-          }).whenComplete(() {
-            setState(() {
-      //        _formKey.currentState!.reset();
-              _image = null;
-
-              EasyLoading.dismiss();
-            });
-          });
-        } else {
-          EasyLoading.dismiss();
-        }
- //     } else {
-   //     EasyLoading.dismiss();
-     // }
-  //  }
+      await _firestore.collection('banners').doc(fileName).set({
+        'image': imageUrl,
+      }).whenComplete(() {
+        EasyLoading.dismiss();
+        setState(() {
+          //        _formKey.currentState!.reset();
+          _image = null;
+        });
+      });
+    } else {
+      EasyLoading.dismiss();
+    }
+    //     } else {
+    //     EasyLoading.dismiss();
+    // }
+    //  }
   }
 
   @override
