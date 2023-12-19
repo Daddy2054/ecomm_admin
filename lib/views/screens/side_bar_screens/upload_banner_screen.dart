@@ -13,11 +13,12 @@ class UploadBannerScreen extends StatefulWidget {
 }
 
 class _UploadBannerScreenState extends State<UploadBannerScreen> {
-  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  dynamic _image;
 
+  late String categoryName;
+  dynamic _image;
   String? fileName;
 
   pickImage() async {
@@ -46,27 +47,27 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
 
   uploadToFirebase() async {
     EasyLoading.show();
-    //if (_formKey.currentState != null) {
-    //  if (_formKey.currentState!.validate()) {
-    if (_image != null) {
-      String imageUrl = await _uploadBannersToStorage(_image);
+    if (_formKey.currentState != null) {
+      if (_formKey.currentState!.validate()) {
+        if (_image != null) {
+          String imageUrl = await _uploadBannersToStorage(_image);
 
-      await _firestore.collection('banners').doc(fileName).set({
-        'image': imageUrl,
-      }).whenComplete(() {
+          await _firestore.collection('banners').doc(fileName).set({
+            'image': imageUrl,
+          }).whenComplete(() {
+            EasyLoading.dismiss();
+            setState(() {
+              _formKey.currentState!.reset();
+              _image = null;
+            });
+          });
+        } else {
+          EasyLoading.dismiss();
+        }
+      } else {
         EasyLoading.dismiss();
-        setState(() {
-          //        _formKey.currentState!.reset();
-          _image = null;
-        });
-      });
-    } else {
-      EasyLoading.dismiss();
+      }
     }
-    //     } else {
-    //     EasyLoading.dismiss();
-    // }
-    //  }
   }
 
   @override
