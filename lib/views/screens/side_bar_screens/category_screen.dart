@@ -4,6 +4,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
+import '../../widgets/category_widget.dart';
+
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});
   static const String routeName = 'categoryScreen';
@@ -40,7 +42,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     Reference ref = _firebaseStorage.ref().child('categories').child(fileName!);
 
     UploadTask uploadTask = ref.putData(image!);
-        // UploadTask uploadTask = ref.putFile(image); //to long to refactor
+    // UploadTask uploadTask = ref.putFile(image); //to long to refactor
     TaskSnapshot snap = await uploadTask;
     String downloadUrl = await snap.ref.getDownloadURL();
 
@@ -187,6 +189,21 @@ class _CategoryScreenState extends State<CategoryScreen> {
           const Divider(
             color: Colors.grey,
           ),
+          Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.all(10),
+            child: const Text(
+              'Categories',
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 36,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          const CategoryListWidget(),
         ],
       ),
     );
