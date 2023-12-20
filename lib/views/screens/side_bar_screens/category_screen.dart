@@ -36,10 +36,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
     }
   }
 
-  _uploadBannersToStorage(dynamic image) async {
+  _uploadImagesToStorage(dynamic image) async {
     Reference ref = _firebaseStorage.ref().child('categories').child(fileName!);
 
     UploadTask uploadTask = ref.putData(image!);
+        // UploadTask uploadTask = ref.putFile(image); //to long to refactor
     TaskSnapshot snap = await uploadTask;
     String downloadUrl = await snap.ref.getDownloadURL();
 
@@ -51,7 +52,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     // if (_formKey.currentState != null) {
     if (_formKey.currentState!.validate()) {
       if (_image != null) {
-        String imageUrl = await _uploadBannersToStorage(_image);
+        String imageUrl = await _uploadImagesToStorage(_image);
         await _firestore.collection('categories').doc(fileName).set({
           'image': imageUrl,
           'categoryName': categoryName,
