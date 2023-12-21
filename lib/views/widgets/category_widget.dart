@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CategoryListWidget extends StatelessWidget {
@@ -44,29 +45,26 @@ class CategoryListWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               var data = snapshot.data!.docs[index];
 
-              return Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      height: 80,
-                      width: 100,
-                      child: Image.network(
-                        data['image'],
-                        width: double.infinity,
-                        height: double.infinity,
-                        // fit: BoxFit.cover,
-                      ),
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: CachedNetworkImage(
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      imageUrl: data['image'],
+                      width: double.infinity,
+                      fit: BoxFit.fitWidth,
                     ),
-                    // Expanded(
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.all(8.0),
-                    //     child: Text(data['categoryName']),
-                    //   ),
-                    // ),
-                  ],
-                ),
+                  ),
+                  Expanded(
+                      child: Text(
+                    data['categoryName'],
+                    style: const TextStyle(fontSize: 15),
+                  )),
+                ],
               );
             });
       },
