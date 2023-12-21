@@ -1,14 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class CategoryListWidget extends StatelessWidget {
-  const CategoryListWidget({super.key});
+class UploadBannerList extends StatelessWidget {
+  const UploadBannerList({super.key});
 
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> categoryStream =
-        FirebaseFirestore.instance.collection('categories').snapshots();
+        FirebaseFirestore.instance.collection('banners').snapshots();
 
     return StreamBuilder<QuerySnapshot>(
       stream: categoryStream,
@@ -26,7 +26,7 @@ class CategoryListWidget extends StatelessWidget {
         if (snapshot.data!.docs.isEmpty) {
           return const Center(
             child: Text(
-              'No Categories\n Added yet',
+              'No Banners\n Added yet',
               style: TextStyle(
                 color: Colors.blueGrey,
                 fontSize: 30,
@@ -45,7 +45,7 @@ class CategoryListWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               var data = snapshot.data!.docs[index];
 
-              return Column(
+         return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   SizedBox(
@@ -59,13 +59,29 @@ class CategoryListWidget extends StatelessWidget {
                       fit: BoxFit.fitWidth,
                     ),
                   ),
-                  Expanded(
-                      child: Text(
-                    data['categoryName'],
-                    style: const TextStyle(fontSize: 15),
-                  ),),
+          
                 ],
               );
+   
+              // return Padding(
+              //   padding: const EdgeInsets.all(15.0),
+              //   child: Container(
+              //     child: Column(
+              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //       children: [
+              //         SizedBox(
+              //           height: 100,
+              //           width: 100,
+              //           child: Image.network(
+              //             data['image'],
+              //             width: double.infinity,
+              //             fit: BoxFit.fitWidth,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // );
             });
       },
     );
