@@ -31,9 +31,9 @@ class _MainScreenState extends State<MainScreen> {
           _selectedItem = const VendorScreen();
         });
         break;
-      case WithdravalScreen.routeName:
+      case WithdrawalScreen.routeName:
         setState(() {
-          _selectedItem = const WithdravalScreen();
+          _selectedItem = const WithdrawalScreen();
         });
         break;
       case OrderScreen.routeName:
@@ -93,7 +93,7 @@ class _MainScreenState extends State<MainScreen> {
           AdminMenuItem(
             title: 'Withdrawal',
             icon: Icons.attach_money,
-            route: WithdravalScreen.routeName,
+            route: WithdrawalScreen.routeName,
           ),
           AdminMenuItem(
             title: 'Orders',
