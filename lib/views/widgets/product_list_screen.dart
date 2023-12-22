@@ -73,7 +73,7 @@ class _ProductListWidgetState extends State<ProductListWidget> {
                       3),
                   vendorData(
                       Text(
-                        "\$" ' ' + order['productPrice'].toString(),
+                        "\$ ${order['productPrice']}",
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       2),
